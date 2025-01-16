@@ -1,56 +1,20 @@
-# fastboot-embroider-repro
+# fastboot-file-override-embroider-reproduction
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+This reproduces an issue where FastBoot runs a runtime error under a very specific set of circumstances:
 
-## Prerequisites
+- The app must be using Embroider
+- The app must be built for production
+- You must be overriding a file with a fastboot specific version
+- The file that you are overriding must be importing .css
+- No other files must be importing css (including dependencies)
 
-You will need the following things properly installed on your computer.
+Once all conditions are met, FastBoot will throw the following error:
 
-- [Git](https://git-scm.com/)
-- [Node.js](https://nodejs.org/) (with npm)
-- [Ember CLI](https://cli.emberjs.com/release/)
-- [Google Chrome](https://google.com/chrome/)
+```
+Error: Could not find module `fastboot-embroider-repro/app` imported from `~fastboot/app-factory`
+```
 
-## Installation
+## To reproduce
 
-- `git clone <repository-url>` this repository
-- `cd fastboot-embroider-repro`
-- `npm install`
-
-## Running / Development
-
-- `npm run start`
-- Visit your app at [http://localhost:4200](http://localhost:4200).
-- Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
-
-### Code Generators
-
-Make use of the many generators for code, try `ember help generate` for more details
-
-### Running Tests
-
-- `npm run test`
-- `npm run test:ember -- --server`
-
-### Linting
-
-- `npm run lint`
-- `npm run lint:fix`
-
-### Building
-
-- `npm exec ember build` (development)
-- `npm run build` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-- [ember.js](https://emberjs.com/)
-- [ember-cli](https://cli.emberjs.com/release/)
-- Development Browser Extensions
-  - [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  - [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+- run `npm install`
+- run `npm start`
